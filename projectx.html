@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .login-container {
+      background-color: black;
+      color: yellow;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #project-name {
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+
+    #login-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #hint {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    #attempts {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
+
+    #success-message {
+      color: green;
+      font-size: 18px;
+      margin-top: 20px;
+      display: none;
+    }
+
+    #fail-message {
+      color: red;
+      font-size: 18px;
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div id="project-name">PROJECT X BY KIAN TAWATAO</div>
+
+    <form id="login-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <div id="hint">HINT: username: What is full of holes but still holds water? password: How do you spell COW in thirteen letters? (ALL LOWERCASE SPACE INCLUDED)</div>
+
+      <div id="attempts">You have only 2 attempts left</div>
+
+      <button type="button" onclick="checkLogin()">Login</button>
+    </form>
+
+    <div id="success-message">CONGRATS DAHIL NAHULAAN MO ANG PASSWORD! CHAT MOKO MAY LIBRE KANG ISANG PIRASONG SALONPAS! SALAMAT SA PAG-TESTING NG WEBSITE</div>
+
+    <div id="fail-message">BAWI KANALANG NEXT LIFE</div>
+  </div>
+
+  <script>
+    let attemptsLeft = 2;
+
+    function checkLogin() {
+      const usernameInput = document.getElementById('username').value.toLowerCase();
+      const passwordInput = document.getElementById('password').value.toLowerCase();
+      const attemptsMessage = document.getElementById('attempts');
+      const successMessage = document.getElementById('success-message');
+      const failMessage = document.getElementById('fail-message');
+
+      if (usernameInput === 'a sponge' && passwordInput === 'see o double you') {
+        document.body.style.backgroundColor = 'green';
+        successMessage.style.display = 'block';
+        attemptsMessage.style.display = 'none';
+        failMessage.style.display = 'none';
+      } else {
+        attemptsLeft--;
+        attemptsMessage.innerText = `You have only ${attemptsLeft} attempt${attemptsLeft === 1 ? '' : 's'} left`;
+        attemptsMessage.style.display = 'block';
+
+        if (attemptsLeft === 0) {
+          document.body.style.backgroundColor = 'red';
+          document.getElementById('project-name').innerText = 'BAWI KANALANG NEXT LIFE';
+          successMessage.style.display = 'none';
+          failMessage.style.display = 'block';
+          attemptsMessage.style.display = 'none';
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
